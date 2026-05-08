@@ -517,6 +517,9 @@ File PDF **tidak boleh** diakses langsung via URL. Mekanismenya:
 **SSH:**
 `ssh -p 65002 u585715077@145.79.14.106`
 
+**Set PHP version:**
+export PATH=/opt/alt/php83/usr/bin:$PATH
+
 **Domain:**
 https://ebuuk.msae.web.id
 

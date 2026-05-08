@@ -133,13 +133,13 @@
     <!-- KATEGORI POPULER -->
     <section class="py-14 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-8">
+        <div class="flex items-start sm:items-center justify-between gap-4 mb-8">
           <div>
             <h2 class="text-2xl font-bold text-slate-900">Kategori Populer</h2>
             <p class="text-slate-400 text-sm mt-1">Temukan buku sesuai minatmu</p>
           </div>
           <Link :href="route('katalog')"
-                class="text-teal-600 text-sm font-medium hover:underline flex items-center gap-1">
+                class="text-teal-600 text-sm font-medium hover:underline flex items-center gap-1 shrink-0 whitespace-nowrap mt-1 sm:mt-0">
             Lihat semua
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -171,13 +171,13 @@
     <!-- BUKU TERBARU -->
     <section class="py-14 bg-slate-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-8">
+        <div class="flex items-start sm:items-center justify-between gap-4 mb-8">
           <div>
             <h2 class="text-2xl font-bold text-slate-900">Pilihan Terbaru</h2>
             <p class="text-slate-400 text-sm mt-1">Ebook yang baru saja ditambahkan</p>
           </div>
           <Link :href="route('katalog')"
-                class="text-teal-600 text-sm font-medium hover:underline flex items-center gap-1">
+                class="text-teal-600 text-sm font-medium hover:underline flex items-center gap-1 shrink-0 whitespace-nowrap mt-1 sm:mt-0">
             Lihat semua
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
