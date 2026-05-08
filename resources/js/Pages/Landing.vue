@@ -135,8 +135,8 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-start sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h2 class="text-2xl font-bold text-slate-900">Kategori Populer</h2>
-            <p class="text-slate-400 text-sm mt-1">Temukan buku sesuai minatmu</p>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Kategori Populer</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1">Temukan buku sesuai minatmu</p>
           </div>
           <Link :href="route('katalog')"
                 class="text-teal-600 text-sm font-medium hover:underline flex items-center gap-1 shrink-0 whitespace-nowrap mt-1 sm:mt-0">
@@ -173,8 +173,8 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-start sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h2 class="text-2xl font-bold text-slate-900">Pilihan Terbaru</h2>
-            <p class="text-slate-400 text-sm mt-1">Ebook yang baru saja ditambahkan</p>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Pilihan Terbaru</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1">Ebook yang baru saja ditambahkan</p>
           </div>
           <Link :href="route('katalog')"
                 class="text-teal-600 text-sm font-medium hover:underline flex items-center gap-1 shrink-0 whitespace-nowrap mt-1 sm:mt-0">
