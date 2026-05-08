@@ -1,100 +1,89 @@
-<script setup>
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-
-defineProps({
-    canResetPassword: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
-
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false,
-});
-
-const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-    });
-};
-</script>
-
 <template>
-    <GuestLayout>
-        <Head title="Log in" />
+  <div class="min-h-screen bg-teal-50 flex items-center justify-center p-4"
+       style="font-family: 'Inter', sans-serif;">
+    <div class="w-full max-w-md">
 
-        <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
-            {{ status }}
+      <!-- Card -->
+      <div class="bg-white rounded-2xl shadow-lg p-8">
+
+        <!-- Logo -->
+        <div class="text-center mb-8">
+          <Link :href="route('landing')">
+            <img src="/images/logo_ebuuk_light.png"
+                 alt="ebuuk.id" class="h-10 w-auto mx-auto">
+          </Link>
+          <p class="text-slate-500 text-sm mt-2">Masuk ke akun kamu</p>
         </div>
 
+        <!-- Error -->
+        <div v-if="Object.keys(errors).length"
+             class="bg-red-50 border border-red-200 text-red-600 rounded-lg px-4 py-3 text-sm mb-5">
+          {{ Object.values(errors)[0] }}
+        </div>
+
+        <!-- Form -->
         <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Email</label>
+            <input v-model="form.email" type="email" required autofocus
+                   placeholder="email@kamu.com"
+                   class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm
+                          focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+          </div>
 
-                <InputError class="mt-2" :message="form.errors.email" />
+          <div class="mb-6">
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
+            <div class="relative">
+              <input v-model="form.password" :type="showPassword ? 'text' : 'password'" required
+                     placeholder="••••••••"
+                     class="w-full border border-slate-200 rounded-lg pl-4 pr-10 py-2.5 text-sm
+                            focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+              <button type="button" @click="showPassword = !showPassword"
+                      class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
+                <svg v-if="!showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                </svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </button>
             </div>
+          </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+          <button type="submit" :disabled="form.processing"
+                  class="w-full bg-teal-600 hover:bg-teal-700 disabled:opacity-50
+                         text-white font-semibold py-2.5 rounded-lg text-sm transition-colors">
+            {{ form.processing ? 'Memproses...' : 'Masuk →' }}
+          </button>
 
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="current-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4 block">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
-                    >
-                </label>
-            </div>
-
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Forgot your password?
-                </Link>
-
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Log in
-                </PrimaryButton>
-            </div>
         </form>
-    </GuestLayout>
+
+        <!-- Register link -->
+        <p class="text-center text-sm text-slate-500 mt-6">
+          Belum punya akun?
+          <Link :href="route('register')" class="text-teal-600 font-medium hover:underline">
+            Daftar sekarang
+          </Link>
+        </p>
+
+      </div>
+
+      <p class="text-center text-xs text-slate-400 mt-4">
+        © {{ new Date().getFullYear() }} ebuuk.id — Baca. Belajar. Bertumbuh.
+      </p>
+    </div>
+  </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { Link, useForm } from '@inertiajs/vue3'
+
+defineProps({ errors: { type: Object, default: () => ({}) } })
+
+const showPassword = ref(false)
+const form = useForm({ email: '', password: '', remember: false })
+const submit = () => form.post(route('login'))
+</script>

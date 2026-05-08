@@ -509,3 +509,17 @@ File PDF **tidak boleh** diakses langsung via URL. Mekanismenya:
 - **Save progress** via axios POST saat user ganti halaman di reader
 - **Build production**: `npm run build` → `git add -f public/build` → push → deploy
 - Semua teks konten **Bahasa Indonesia**
+
+---
+
+## 15. Informasi Deployment
+
+**SSH:**
+`ssh -p 65002 u585715077@145.79.14.106`
+
+**Domain:**
+https://ebuuk.msae.web.id
+
+**Direktori Server:**
+`/home/u585715077/domains/msae.web.id/public_html/ebuuk`
+

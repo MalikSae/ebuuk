@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'gender', 'avatar'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -28,6 +28,18 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getAvatarUrlAttribute(): string
+    {
+        if ($this->avatar && $this->gender) {
+            $folder = $this->gender === 'laki-laki' ? 'man' : 'woman';
+            $path = public_path("images/{$folder}/{$this->avatar}.png");
+            if (file_exists($path)) {
+                return asset("images/{$folder}/{$this->avatar}.png");
+            }
+        }
+        return asset('images/cover-default.svg');
     }
 
     // Relasi ke rak buku user
